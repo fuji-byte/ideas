@@ -67,6 +67,10 @@ export default function TodoApp() {
       toast.error("アイデア名は必須です")
       return
     }
+    if(!userId) {
+      toast.error("追加にはログインが必要です。")
+      return
+    }
     const id = uuidv4()
     const completed = false
 

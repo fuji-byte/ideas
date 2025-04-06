@@ -28,12 +28,13 @@ export default function TaskDetailPage() {
   useEffect(() => {
     // ユーザー情報の取得
     const getUser = async () => {
+      if (typeof window !== "undefined") {
       const {
         data: { session },
       } = await supabase.auth.getSession()
       setUser(session?.user || null)
       setIsWriter(userId == session?.user.id)
-    }
+    }}
     getUser()
   }, [userId])
 
@@ -127,7 +128,9 @@ export default function TaskDetailPage() {
     )
   }
 
-  const getInputWidth = (text: string, max = 40) => {
+  const getInputWidth = (text: string) => {
+    const isMobile = window.innerWidth <= 640 // Tailwindのsm基準（640px以下）
+    const max = isMobile ? 30 : 100
     const fullWidthChars = (text.match(/[^\x00-\x7F]/g) || []).length
     const halfWidthChars = text.length - fullWidthChars
     const width = (halfWidthChars + fullWidthChars * 1.8) + 4 // 余白込み
@@ -166,8 +169,8 @@ export default function TaskDetailPage() {
         )}
         </div>
       </header>
-      <div className="">
-        <h1 className="text-2xl font-bold mb-4">アイデア詳細</h1>
+      <div className="w-9/10">
+        <h1 className="text-2xl font-bold">アイデア詳細</h1>
         {isEditing ? (
           <div className="space-y-2">
             <strong>アイデア名:</strong>
@@ -177,6 +180,7 @@ export default function TaskDetailPage() {
             <strong>説明:</strong>
             <TextareaAutosize
               value={editedDesc}
+              style={{ width: `${getInputWidth(editedDesc)}ch` }}
               onChange={(e) => setEditedDesc(e.target.value)}
               className="resize-none border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content min-h-16 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
             />
@@ -197,15 +201,15 @@ export default function TaskDetailPage() {
               {isWriter && (
                 <>
                   <Button size="icon" variant="ghost" onClick={() => setIsEditing(true)}>
-                  <Pencil className="h-4 w-4" />
+                    <Pencil className="h-4 w-4" />
                   </Button>
                   <Button size="icon" variant="ghost" onClick={() => setShowDeleteConfirmation(true)}>
-                  <Trash2 className="h-4 w-4" />
+                    <Trash2 className="h-4 w-4" />
                   </Button>
                 </>
               )}
                 <Button size="icon" variant="ghost" onClick={handleShare}>
-                <Share2 className="h-4 w-4" />
+                  <Share2 className="h-4 w-4" />
                 </Button>
             </div>
           </>

@@ -67,7 +67,9 @@ export default function TaskItem({ task, onDelete, onEdit }: TaskItemProps) {
     }
   }
 
-  const getInputWidth = (text: string, max = 40) => {
+  const getInputWidth = (text: string) => {
+    const isMobile = window.innerWidth <= 640 // Tailwindのsm基準（640px以下）
+    const max = isMobile ? 30 : 40
     const fullWidthChars = (text.match(/[^\x00-\x7F]/g) || []).length
     const halfWidthChars = text.length - fullWidthChars
     const width = (halfWidthChars + fullWidthChars * 1.8) + 4 // 余白込み
@@ -91,7 +93,7 @@ export default function TaskItem({ task, onDelete, onEdit }: TaskItemProps) {
                 overflowWrap: "break-word", // 単語途中でも折り返す
                 wordBreak: "break-all",     // 長い文字でも改行
               }}
-              className="transition-all"
+              className="w-full transition-all"
             />
           </div>
           <Button size="icon" variant="ghost" onClick={handleEdit}>
