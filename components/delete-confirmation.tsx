@@ -19,7 +19,7 @@ interface DeleteConfirmationProps {
 export default function DeleteConfirmation({ onConfirm, onCancel }: DeleteConfirmationProps) {
   return (
     <AlertDialog defaultOpen>
-      <AlertDialogContent>
+      <AlertDialogContent className="w-9/10">
         <AlertDialogHeader>
           <AlertDialogTitle>アイデアを削除しますか？</AlertDialogTitle>
           <AlertDialogDescription>このアイデアを削除します。この操作は元に戻せません。</AlertDialogDescription>

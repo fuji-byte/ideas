@@ -1,3 +1,9 @@
+# *
 User-agent: *
 Allow: /
+
+# Host
+Host: https://www.touhobby.com
+
+# Sitemaps
 Sitemap: https://www.touhobby.com/sitemap.xml

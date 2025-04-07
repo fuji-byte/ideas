@@ -62,8 +62,8 @@ export default function TaskItem({ task, onDelete, onEdit }: TaskItemProps) {
       toast.success("リンクをコピーしました！", {
         description: shareUrl,
       })
-    } catch (err) {
-      console.error("コピーに失敗しました", err)
+    } catch {
+      toast.warning("コピーに失敗しました")
     }
   }
 
@@ -125,7 +125,7 @@ export default function TaskItem({ task, onDelete, onEdit }: TaskItemProps) {
       )}
 
       {showDeleteConfirmation && (
-        <DeleteConfirmation onConfirm={handleDelete} onCancel={() => setShowDeleteConfirmation(false)} />
+          <DeleteConfirmation onConfirm={handleDelete} onCancel={() => setShowDeleteConfirmation(false)} />
       )}
     </li>
   )

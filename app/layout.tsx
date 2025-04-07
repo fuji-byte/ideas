@@ -15,18 +15,44 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Ideas",
   description: "Easily capture and share your ideas anytime, anywhere.",
+  alternates: {
+    canonical: "https://ideas-rho-eight.vercel.app/",
+  },
   keywords: ["ideas", "note app", "creativity", "memo", "idea sharing"],
-  authors: [{ name: "fuji-byte", url: "https://www.touhobby.com" }],
+  authors: [
+    {
+      name: "fuji-byte",
+      url: "https://www.touhobby.com",
+    },
+    {
+      name: "Ideas App",
+      url: "https://ideas-rho-eight.vercel.app",
+    },
+  ],
   creator: "fuji-byte",
-  metadataBase: new URL("https://www.touhobby.com"),
+  metadataBase: new URL("https://ideas-rho-eight.vercel.app"),
   openGraph: {
     title: "Ideas",
     description: "Capture and share your creative ideas easily.",
-    url: "https://www.touhobby.com",
+    url: "https://ideas-rho-eight.vercel.app",
     siteName: "Ideas",
     type: "website",
-  }
-};
+    images: [
+      {
+        url: "https://ideas-rho-eight.vercel.app/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Ideas App",
+      },
+      {
+        url: "https://www.touhobby.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Ideas App",
+      },
+    ],
+  },
+}
 
 // export default function RootLayout({
 //   children,

@@ -7,6 +7,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { supabase } from "@/lib/supabase"
+import { toast } from "sonner"
 
 export default function SignupPage() {
   const [email, setEmail] = useState("")
@@ -46,15 +47,15 @@ export default function SignupPage() {
       //     throw profileError
       //   }
       // }
-
+      toast.success("Emailを確認し、承認してください。")
       router.push("/")
       router.refresh()
     } catch (error: unknown) {
       if (error instanceof Error) {
-        console.error("サインアップエラー:", error)
+        toast.warning("サインアップエラー")
         setError(error.message)
       } else {
-        console.error("不明なエラー:", error)
+        toast.warning("不明なエラー")
         setError("不明なエラーが発生しました")
       }
     } finally {
