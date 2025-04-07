@@ -1,5 +1,4 @@
 "use client"
-console.log("✅ page.tsx レンダリング成功！")
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import TaskForm from "./task-form"
@@ -123,6 +122,7 @@ export default function TodoApp() {
     await supabase.auth.signOut()
     setTasks([])
     setUser(null)
+    setUserId("")
   }
 
   const top = () => {
@@ -163,7 +163,13 @@ export default function TodoApp() {
       </header>
       <TaskForm onAddTask={addTask} />
       {!taskLoading ? (
-      <TaskList tasks={tasks} onDeleteTask={deleteTask} onEditTask={editTask} />
+        <>
+          {!user ? (
+              <p>サインアップ、ログインしてアイデアを追加しよう！</p>
+          ):(
+            <TaskList tasks={tasks} onDeleteTask={deleteTask} onEditTask={editTask} />
+          )}
+        </>
       ):(
       <p>now loadnig ...</p>)}
     </div>

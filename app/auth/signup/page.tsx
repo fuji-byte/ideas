@@ -11,7 +11,7 @@ import { supabase } from "@/lib/supabase"
 export default function SignupPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [name, setName] = useState("")
+  //const [name, setName] = useState("")
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const router = useRouter()
@@ -24,28 +24,28 @@ export default function SignupPage() {
 
     try {
       // サインアップ処理（講義内で実装）
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email,
         password,
-        options: {
-          data: {
-            name,
-          },
-        },
+        // options: {
+        //   data: {
+        //     name,
+        //   },
+        // },
       })
 
       if (error) {
         throw error
       }
 
-      // プロフィール作成
-      if (data.user) {
-        const { error: profileError } = await supabase.from("profiles").insert([{ id: data.user.id, name }])
+      // // プロフィール作成
+      // if (data.user) {
+      //   const { error: profileError } = await supabase.from("profiles").insert([{ id: data.user.id, name }])
 
-        if (profileError) {
-          throw profileError
-        }
-      }
+      //   if (profileError) {
+      //     throw profileError
+      //   }
+      // }
 
       router.push("/")
       router.refresh()
@@ -69,7 +69,7 @@ export default function SignupPage() {
       {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">{error}</div>}
 
       <form onSubmit={handleSignup} className="block text-center mx-auto space-y-4 w-full">
-        <div>
+        {/* <div>
           <label htmlFor="name" className="block mb-1">
             名前
           </label>
@@ -81,7 +81,7 @@ export default function SignupPage() {
             required
             className="w-9/10 px-3 py-2 border rounded"
           />
-        </div>
+        </div> */}
 
         <div>
           <label htmlFor="email" className="block mb-1">
